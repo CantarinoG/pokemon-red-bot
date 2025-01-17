@@ -1,4 +1,3 @@
-import os
 import pyscreenshot as ImageGrab
 import cv2
 import numpy as np
