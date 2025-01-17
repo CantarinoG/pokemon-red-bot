@@ -5,13 +5,11 @@ import pyautogui
 class InputController:
 
     def __init__(self, pattern: list = ['r', 'd', 'l', 'u']):
-        pyautogui.PAUSE = 0
         self._pattern = pattern
         self._current_index = 0
         
     def _press_key(self, key: str) -> None:
         pyautogui.keyDown(key)
-        time.sleep(0.1)
         pyautogui.keyUp(key)
 
     def press_up(self) -> None:
