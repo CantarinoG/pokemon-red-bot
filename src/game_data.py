@@ -1,6 +1,15 @@
+"""
+Módulo que contém dados estáticos sobre tipos de Pokémon, multiplicadores de dano,
+informações de Pokémon e seus movimentos.
+
+Este módulo define constantes e dicionários que são usados para calcular danos
+e determinar efetividade de ataques em batalhas Pokémon.
+"""
+
+# Constantes para os tipos de Pokémon
 TYPE_NORMAL = "NORMAL"
 TYPE_FIRE = "FIRE"
-TYPE_WATER = "WATER"
+TYPE_WATER = "WATER" 
 TYPE_ELECTRIC = "ELECTRIC"
 TYPE_GRASS = "GRASS"
 TYPE_ICE = "ICE"
@@ -14,6 +23,9 @@ TYPE_ROCK = "ROCK"
 TYPE_GHOST = "GHOST"
 TYPE_DRAGON = "DRAGON"
 
+# Dicionário com multiplicadores de dano entre tipos
+# A chave externa é o tipo do ataque e a interna é o tipo do Pokémon que recebe o ataque
+# Os valores representam o multiplicador de dano (2 para super efetivo, 0.5 para não muito efetivo, 0 para sem efeito)
 damage_multiplier = {
     TYPE_NORMAL: {TYPE_ROCK: 0.5, TYPE_GHOST: 0},
     TYPE_FIRE: {TYPE_FIRE: 0.5, TYPE_WATER: 0.5, TYPE_ROCK: 0.5, TYPE_GRASS: 2, TYPE_ICE: 2, TYPE_BUG: 2, TYPE_DRAGON: 0.5},
@@ -32,6 +44,8 @@ damage_multiplier = {
     TYPE_DRAGON: {TYPE_DRAGON: 2}
 }
 
+# Dicionário com dados dos Pokémon
+# A chave é o nome do Pokémon e o valor é uma lista com seus tipos
 pokemon_data = {
     "dragonite": [TYPE_DRAGON, TYPE_FLYING],
     "dugtrio": [TYPE_GROUND],
@@ -50,6 +64,8 @@ pokemon_data = {
     "venomoth": [TYPE_BUG, TYPE_POISON],
 }
 
+# Dicionário com dados dos movimentos
+# A chave é o nome do movimento e o valor é um dicionário com seu dano base e tipo
 moves_data = {
     "agility": {"damage": 0, "type": TYPE_PSYCHIC},
     "body_slam": {"damage": 85, "type": TYPE_NORMAL},

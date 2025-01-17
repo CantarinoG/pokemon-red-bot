@@ -1,7 +1,17 @@
 from game_data import pokemon_data, moves_data, damage_multiplier
 
 class BattleState:
+    """
+    Classe que representa o estado de uma batalha Pokémon.
+    
+    Mantém informações sobre os Pokémon em batalha, seus tipos, movimentos disponíveis
+    e calcula danos considerando vantagens/desvantagens de tipo.
+    """
+
     def __init__(self):
+        """
+        Inicializa um novo estado de batalha com valores vazios.
+        """
         self.my_pokemon_name: str = None
         self.my_pokemon_types: list = None
         self.enemy_pokemon_name: str = None 
@@ -10,10 +20,19 @@ class BattleState:
         self.move_selected: int = 0
 
     def get_pokemon_types(self) -> None:
+        """
+        Obtém os tipos dos Pokémon em batalha a partir do conjunto de dados.
+        """
         self.my_pokemon_types = pokemon_data[self.my_pokemon_name]
         self.enemy_pokemon_types = pokemon_data[self.enemy_pokemon_name]
 
     def update_moves_damage(self) -> None:
+        """
+        Atualiza o dano de cada movimento considerando:
+        - Dano base do movimento
+        - Bônus STAB (Same Type Attack Bonus) de 1.5x se o tipo do movimento corresponder ao tipo do Pokémon
+        - Multiplicadores de tipo contra o Pokémon inimigo
+        """
         for move in self.moves:
             move_data = moves_data[move["name"]]
             damage = move_data["damage"]
@@ -26,6 +45,12 @@ class BattleState:
             move["damage"] = damage * type_multiplier
 
     def get_movements_to_highest_damage(self) -> None:
+        """
+        Calcula quantos movimentos são necessários para selecionar o ataque com maior dano.
+        
+        Returns:
+            int: Número de vezes que é necessário mover o cursor para chegar no melhor movimento
+        """
         max_damage = -float('inf')
         best_move_index = 0
         for i, move in enumerate(self.moves):
@@ -40,6 +65,12 @@ class BattleState:
         return moves_needed
 
     def to_string(self) -> str:
+        """
+        Gera uma representação em string do estado atual da batalha.
+        
+        Returns:
+            str: String formatada contendo informações sobre os Pokémon e seus movimentos
+        """
         string = (
             f"BATTLE STATE\n\n"
             f"{self.my_pokemon_name} ({', '.join(self.my_pokemon_types) if self.my_pokemon_types else 'None'})\n"
